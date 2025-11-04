@@ -1,124 +1,187 @@
-# API Test Automation - ReqRes API
+# API Test Automation - ASTRO Technical Assessment
 
-Automated API testing suite for ReqRes API endpoints using Playwright framework.
+**Task 2**: API Testing & Automation using Playwright
 
-## Project Overview
+**Test Documentation**: [View Test Cases](https://docs.google.com/spreadsheets/d/17hypZCKrcWnpcnHRAiMbF0rXruYk_q3cbDmUgESGJZc/edit?usp=sharing)
 
-This project contains automated test scripts for **Task 2** of the QA technical interview. It tests various API endpoints including user registration, CRUD operations, and error handling scenarios.
+---
 
-## Tech Stack
+## 📋 Overview
 
-- **Framework:** Playwright Test
-- **Language:** JavaScript (ES6+)
-- **API Under Test:** ReqRes API (https://reqres.in)
-- **Node Version:** v22.15.0
-- **npm Version:** v10.9.2
+This project demonstrates automated API testing for the ReqRes REST API using Playwright framework. The test suite covers 8 comprehensive scenarios including positive, negative, and edge cases.
 
-## Project Structure
+**Base API**: `https://reqres.in/api`
+
+---
+
+## 🛠 Tech Stack
+
+- **Framework**: Playwright v1.x
+- **Language**: JavaScript
+- **Runtime**: Node.js v22.15.0
+- **Package Manager**: npm v10.9.2
+
+---
+
+## 📂 Project Structure
 
 ```
 
 astro-api-test/
 ├── tests/
 │   └── astro-api.test.js    \# Main test suite (8 test cases)
-├── node_modules/             \# Dependencies
-├── package.json              \# Project configuration
-├── package-lock.json         \# Dependency lock file
-└── README.md                 \# This file
+├── node_modules/
+├── package.json
+├── package-lock.json
+├── .gitignore
+└── README.md
 
 ```
 
-## Test Coverage
+---
 
-The test suite covers 8 API test scenarios:
+## 🚀 Getting Started
 
-| Test Case | Method | Endpoint | Scenario |
-|-----------|--------|----------|----------|
-| TC-API-Req-001 | POST | /api/register | Register with valid credentials |
-| TC-API-Req-002 | POST | /api/register | Register with missing password |
-| TC-API-Req-003 | GET | /api/users/:id | Retrieve user by valid ID |
-| TC-API-Req-004 | GET | /api/users/:id | Retrieve user with invalid ID |
-| TC-API-Req-005 | POST | /api/users | Create user successfully |
-| TC-API-Req-006 | POST | /api/users | Create user with missing field |
-| TC-API-Req-007 | DELETE | /api/users/:id | Delete user successfully |
-| TC-API-Req-008 | DELETE | /api/users/:id | Delete non-existent user |
+### Prerequisites
 
-## Prerequisites
+- Node.js (v18 or higher)
+- npm (v8 or higher)
+- Git
 
-Ensure you have the following installed:
-- Node.js (v22 or higher)
-- npm (v10 or higher)
+### Installation
 
-## Installation
-
-1. Navigate to project directory:
 ```
+
+
+# Clone the repository
+
+git clone https://github.com/ardituran/astro-api-test.git
+
+# Navigate to project directory
 
 cd astro-api-test
 
-```
-
-2. Install dependencies:
-```
+# Install dependencies
 
 npm install
 
 ```
 
-## Running Tests
+---
 
-Execute all tests:
+## 🧪 Running Tests
+
+### Run all tests
 ```
 
 npx playwright test
 
 ```
 
-Run tests with detailed output:
+### Run tests in UI mode (interactive)
 ```
 
-npx playwright test --reporter=list
+npx playwright test --ui
 
 ```
 
-Run specific test file:
+### Run specific test file
 ```
 
 npx playwright test tests/astro-api.test.js
 
 ```
 
-## Test Results
+### View test report
+```
 
-Latest test run: **8 passed (100% success rate)**
+npx playwright show-report
 
 ```
 
-✓ POST /api/register - Register user with valid data
-✓ POST /api/register - Fail when missing password
-✓ GET /api/users/:id - Retrieve user with valid ID
-✓ GET /api/users/:id - Return 404 for invalid ID
-✓ POST /api/users - Create user successfully
-✓ POST /api/users - Accept request when missing name
-✓ DELETE /api/users/:id - Delete user successfully
-✓ DELETE /api/users/:id - Return 204 for any ID
+### Run with verbose output
+```
+
+npx playwright test --reporter=list
 
 ```
 
-## Key Features
+---
 
-- **Dynamic Test Data:** Random email selection from whitelisted ReqRes accounts
-- **API Key Management:** Centralized API key configuration
-- **Comprehensive Assertions:** Status code validation and response body checks
-- **Real-world Adaptation:** Test expectations adjusted based on actual API behavior
-- **Clean Code:** Minimal comments, readable structure, professional practices
+## 📊 Test Coverage
 
-## Notes
+| # | Test Case ID | Endpoint | Method | Scenario | Status |
+|---|--------------|----------|--------|----------|--------|
+| 1 | TC-API-Req-001 | /api/register | POST | Register with valid credentials | ✅ Pass |
+| 2 | TC-API-Req-002 | /api/register | POST | Register without password (error) | ✅ Pass |
+| 3 | TC-API-Req-003 | /api/users/2 | GET | Retrieve user by valid ID | ✅ Pass |
+| 4 | TC-API-Req-004 | /api/users/999 | GET | Retrieve non-existent user (404) | ✅ Pass |
+| 5 | TC-API-Req-005 | /api/users | POST | Create new user | ✅ Pass |
+| 6 | TC-API-Req-006 | /api/users | POST | Create user with missing field | ✅ Pass |
+| 7 | TC-API-Req-007 | /api/users/2 | DELETE | Delete user by ID | ✅ Pass |
+| 8 | TC-API-Req-008 | /api/users/999 | DELETE | Delete non-existent user | ✅ Pass |
 
-- All tests use the ReqRes free tier API key: `reqres-free-v1`
-- Register endpoint only accepts specific whitelisted email addresses
-- Some API behaviors differ from standard REST conventions (e.g., DELETE always returns 204)
+**Test Results**: 8/8 passed (100% pass rate)
 
-## Author
+---
 
-Created for Astro QA Technical Interview - Task 2
+## 🔑 Key Features
+
+- **Dynamic Test Data**: Random email selection from allowed list
+- **API Authentication**: Uses ReqRes API key (`reqres-free-v1`)
+- **Comprehensive Assertions**: Validates status codes and response body
+- **Positive & Negative Scenarios**: Tests both success and error cases
+- **Clean Code Structure**: Follows best practices for maintainability
+
+---
+
+## 📝 Test Implementation Details
+
+### Authentication
+All requests include API key header:
+```
+
+headers: {
+'x-api-key': 'reqres-free-v1'
+}
+
+```
+
+### Test Data
+Allowed test emails (randomly selected per test):
+- george.bluth@reqres.in
+- janet.weaver@reqres.in
+- emma.wong@reqres.in
+- eve.holt@reqres.in
+- charles.morris@reqres.in
+- tracey.ramos@reqres.in
+
+### Assertions
+Each test validates:
+- HTTP status codes (200, 201, 204, 400, 404)
+- Response body structure
+- Required fields presence
+- Data type validation
+
+---
+
+## 📄 Test Documentation
+
+Full test case details including input data, expected responses, and test scenarios are available in the [Test Case Spreadsheet](https://docs.google.com/spreadsheets/d/17hypZCKrcWnpcnHRAiMbF0rXruYk_q3cbDmUgESGJZc/edit?usp=sharing).
+
+---
+
+## 👨‍💻 Author
+
+**Idris Ardi**  
+GitHub: [@ardituran](https://github.com/ardituran)
+
+---
+
+## 📄 License
+
+MIT License - This project is for ASTRO technical assessment purposes.
+
+---
+
+**Created for ASTRO QA Technical Assessment - Task 2**
