@@ -8,7 +8,7 @@
 
 ## 📋 Overview
 
-This project demonstrates automated API testing for the ReqRes REST API using Playwright framework. The test suite covers 8 comprehensive scenarios including positive, negative, and edge cases.
+This project demonstrates automated API testing for the ReqRes REST API using Playwright framework. The test suite covers 15 comprehensive scenarios including positive, negative, and edge cases across all CRUD operations.
 
 **Base API**: `https://reqres.in/api`
 
@@ -29,7 +29,7 @@ This project demonstrates automated API testing for the ReqRes REST API using Pl
 
 astro-api-test/
 ├── tests/
-│   └── astro-api.test.js    \# Main test suite (8 test cases)
+│   └── astro-api.test.js    \# Main test suite (15 test cases)
 ├── node_modules/
 ├── package.json
 ├── package-lock.json
@@ -78,13 +78,6 @@ npx playwright test
 
 ```
 
-### Run tests in UI mode (interactive)
-```
-
-npx playwright test --ui
-
-```
-
 ### Run specific test file
 ```
 
@@ -92,17 +85,17 @@ npx playwright test tests/astro-api.test.js
 
 ```
 
-### View test report
+### Run specific test file with HTML report
+```
+
+npx playwright test tests/astro-api.test.js --reporter=html
+
+```
+
+### View Report
 ```
 
 npx playwright show-report
-
-```
-
-### Run with verbose output
-```
-
-npx playwright test --reporter=list
 
 ```
 
@@ -120,17 +113,29 @@ npx playwright test --reporter=list
 | 6 | TC-API-Req-006 | /api/users | POST | Create user with missing field | ✅ Pass |
 | 7 | TC-API-Req-007 | /api/users/2 | DELETE | Delete user by ID | ✅ Pass |
 | 8 | TC-API-Req-008 | /api/users/999 | DELETE | Delete non-existent user | ✅ Pass |
+| 9 | TC-API-Req-009 | /api/register | POST | Register with non-whitelisted email | ✅ Pass |
+| 10 | TC-API-Req-010 | /api/users | POST | Create user with empty body | ✅ Pass |
+| 11 | TC-API-Req-011 | /api/login | POST | Login with valid credentials | ✅ Pass |
+| 12 | TC-API-Req-012 | /api/login | POST | Login without password | ✅ Pass |
+| 13 | TC-API-Req-013 | /api/users/12 | PUT | Update user with valid data | ✅ Pass |
+| 14 | TC-API-Req-014 | /api/users/999 | PUT | Update non-existent user (empty body) | ✅ Pass |
+| 15 | TC-API-Req-015 | /api/login | POST | Login with empty body | ✅ Pass |
 
-**Test Results**: 8/8 passed (100% pass rate)
+**Test Results**: 15/15 passed (100% pass rate)
 
 ---
 
 ## 🔑 Key Features
 
+- **Complete CRUD Coverage**: Create, Read, Update, Delete operations
+- **Full HTTP Method Coverage**: GET, POST, PUT, DELETE
 - **Dynamic Test Data**: Random email selection from allowed list
 - **API Authentication**: Uses ReqRes API key (`reqres-free-v1`)
-- **Comprehensive Assertions**: Validates status codes and response body
+- **Comprehensive Assertions**: Validates status codes, response body, and error messages
 - **Positive & Negative Scenarios**: Tests both success and error cases
+- **Edge Case Testing**: Validates boundary conditions and error handling
+- **Login & Authentication Flow**: Tests user authentication endpoints
+- **Data Update Operations**: PUT method testing with valid and non-existent resources
 - **Clean Code Structure**: Follows best practices for maintainability
 
 ---
@@ -162,6 +167,8 @@ Each test validates:
 - Response body structure
 - Required fields presence
 - Data type validation
+- Error message content
+- Timestamp fields (createdAt, updatedAt)
 
 ---
 
